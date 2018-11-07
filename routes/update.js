@@ -4,23 +4,17 @@ var router = express.Router();
 /* GET users listing. */
 
 router.post("/", function(req, res, next) {
-  const listName = req.headers.list_name;
-  const listAddress = req.headers.list_address;
-  const listValue = req.headers.list_value;
-  const listLocationLatitude = req.headers.list_location_latitude;
-  const listLocationLongitude = req.headers.list_location_longitude;
-
   let query =
     "INSERT INTO `racks` (name, address, value, location_latitude, location_longitude) VALUES ('" +
-    req.headers.name +
+    req.body.name +
     "', '" +
-    req.headers.address +
+    req.body.address +
     "', '" +
-    req.headers.value +
+    req.body.value +
     "', '" +
-    req.headers.location_latitude +
+    req.body.locationLatitude +
     "', '" +
-    req.headers.location_longitude +
+    req.body.locationLongitude +
     "')";
 
   connection.query(query, (err, result) => {
@@ -28,6 +22,7 @@ router.post("/", function(req, res, next) {
       return res.status(500).send(err);
     }
     res.send("Hello");
+    connection.end();
   });
 });
 
