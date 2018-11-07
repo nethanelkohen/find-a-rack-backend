@@ -36,7 +36,10 @@ app.use(function(req, res, next) {
 
 app.use("/api/v1/racks", racks);
 app.use("/api/v1/update", update);
-app.get("/", (req, res) => res.send("Server is live"));
+
+app.get("/", function(req, res) {
+  res.send("Server is live");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
