@@ -3,11 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
-  connection.query("SELECT * from racks_copy", function(
-    error,
-    results,
-    fields
-  ) {
+  connection.query("SELECT * from racks", function(error, results, fields) {
     if (error) {
       // res.send(JSON.stringify({ status: 500, error: error, response: null }));
       res.send(error);
