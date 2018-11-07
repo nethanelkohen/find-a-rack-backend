@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
 var http = require("http");
+require("dotenv").config();
 
 var racks = require("./routes/racks");
 var update = require("./routes/update");
@@ -25,10 +26,10 @@ app.use(express.static(path.join(__dirname, "public")));
 //Database connection
 app.use(function(req, res, next) {
   global.connection = mysql.createConnection({
-    host: "localhost" || process.env.DB_HOST,
-    user: "root" || process.env.DB_USER,
-    password: "" || process.env.DB_PASSWORD,
-    database: "racks" || process.env.DB_NAME
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
   });
   connection.connect();
   next();
