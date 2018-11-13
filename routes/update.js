@@ -6,8 +6,8 @@ router.post("/", function(req, res, next) {
     !req.body.name ||
     !req.body.address ||
     !req.body.value ||
-    !req.body.locationLatitude ||
-    !req.body.locationLongitude
+    !req.body.latitude ||
+    !req.body.longitude
   ) {
     return res.status(500).send("Make sure you've added every value");
   }
@@ -17,21 +17,22 @@ router.post("/", function(req, res, next) {
   }
 
   let query =
-    "INSERT INTO `racks` (name, address, value, location_latitude, location_longitude) VALUES ('" +
+    "INSERT INTO `racks` (name, address, value, latitude, longitude) VALUES ('" +
     req.body.name.toUpperCase() +
     "', '" +
     req.body.address.toUpperCase() +
     "', '" +
     req.body.value +
     "', '" +
-    req.body.locationLatitude +
+    req.body.latitude +
     "', '" +
-    req.body.locationLongitude +
+    req.body.longitude +
     "')";
 
   connection.query(query, (err, result) => {
     if (err) {
-      return res.status(500).send(err);
+      console.log(err);
+      return res.send(err);
     }
     res.send("Row added");
     connection.end();
